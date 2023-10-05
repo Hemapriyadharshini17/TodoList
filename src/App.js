@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import NewTodo from "./components/NewGoal/NewTodo";
+import TodoList from "./components/TodoList/TodoList";
+import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const [listTodo, setListTodo] = useState([
+    { id: "List1", text: "Eat" },
+    { id: "List2", text: "Learn" },
+    { id: "List3", text: "Sleep" },
+  ]);
+
+  const addNewTodoHandler = (newTodo) => {
+    setListTodo((prevlistTodo) => prevlistTodo.concat(newTodo));
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="list-todo">
+      <h2>Todo list</h2>
+      <NewTodo onAddTodo={addNewTodoHandler} />
+      <TodoList todo={listTodo} />
     </div>
   );
 }
